@@ -1,0 +1,15 @@
+{
+    "name": "Pokemon",
+    "version": "1.0.0",
+    "description": "Description de votre projet",
+    "scripts": {
+        "install": "cd pokemon_card_back && npm install && cd ../pokemon_card_front && npm install",
+        "start": "concurrently \"cd pokemon_card_front && npm start\" \"cd pokemon_card_back && node app.js\""
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "concurrently": "^7.6.0"
+    }
+}
