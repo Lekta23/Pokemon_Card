@@ -106,3 +106,8 @@ package-lock.json
 
 # TernJS port file
 .tern-port
+
+#Firebase 
+firebase.json
+firebase-debug.log
+```
