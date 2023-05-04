@@ -2,11 +2,11 @@
 
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const tokenSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     username: { type: String, required: true, unique: true, dropDups: true },
-    password: { type: String, required: true }
+    token: { type: String, required: true }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Token', tokenSchema);
 
