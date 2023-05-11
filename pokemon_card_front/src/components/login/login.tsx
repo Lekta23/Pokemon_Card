@@ -11,10 +11,10 @@ const Login = () => {
 
   const loginService: ILoginService = new LoginService();
 
-
   const handleLogin = async () => {
     navigate("/");
-    await loginService.sendLogin(username, password);
+    const token = await loginService.sendLogin(username, password);
+    localStorage.setItem("token", token);
   };
 
   return (
