@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import IDisconnectService from "../../interfaces/login/disconnect.interface";
 import DisconnectService from "../../services/login/disconnect.service";
 import { useNavigate } from "react-router-dom";
+import PokemonCard from "../PokemonCard/pokemonCard";
 
 const Index = () => {
   const disconnectService: IDisconnectService = new DisconnectService();
@@ -21,6 +22,7 @@ const Index = () => {
       >
         Se deconnecter
       </Button>
+      <PokemonCard />
     </div>
   );
 };

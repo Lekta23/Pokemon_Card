@@ -1,9 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/login/login";
-import Index from "./components/index";
-import React from 'react';
 import './App.css';
-import PokemonCard from './components/PokemonCard/pokemonCard';
+import Index from "./components/index";
 
 const App = () => {
   return (
@@ -18,3 +16,4 @@ const App = () => {
 };
 
 export default App;
+  

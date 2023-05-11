@@ -7,9 +7,6 @@
         "start": "concurrently \"cd pokemon_card_front && npm start\" \"cd pokemon_card_back && nodemon app.js\""
     },
     "dependencies": {
-        "@emotion/react": "^11.10.8",
-        "@emotion/styled": "^11.10.8",
-        "@mui/material": "^5.12.3",
         "express": "^4.17.1"
     },
     "devDependencies": {
