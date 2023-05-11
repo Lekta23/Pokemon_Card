@@ -1,7 +1,7 @@
 .pokemon-card {
     background-color: white;
     border: solid 1px black;
-    border-radius: 10px;
+    border-radius: 100px;
     width: 270px;
 }
 
@@ -18,8 +18,24 @@
 }
 
 .pokemon-card--sprite {
-    width: 256px;
-    height: 256px;
+    background-color: white;
+    width: 250px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
     border: solid #EBEBEB 5px;
+    border-radius: 15px;
+}
+
+.pokemon-card--type {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin: 2px;
+}
+
+.pokemon-card--type-image {
+    width: 30px;
+    height: 30px;
     border-radius: 15px;
 }

@@ -52,69 +52,34 @@ const PokemonCard = () => {
         {pokeData['name']['fr']} ({pokeData['name']['en']})
       </Typography>
 
-      <CardMedia
-        className='pokemon-card--sprite'
-        component="img"
-        height="194"
-        image={pokeData['sprites']['regular']}
-      />
+      <div className='pokemon-card--sprite'>
+        <CardMedia
+          component="img"
+          image={pokeData['sprites']['regular']}
+        />
+      </div>
+      
+      <div className='center'>
+        <div className='pokemon-card--type'>
+          <CardMedia
+            className='pokemon-card--type-image'
+            component="img"
+            image={pokeData['types'][0]['image']}
+          />
+          <Typography>
+            {pokeData['types'][0]['name']}
+          </Typography>
+        </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          textAlign: "center"
-        }}
-      >
-        <Typography>
-          Types :
-        </Typography>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center"
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              textAlign: "center",
-              margin: "2px"
-            }}
-          >
-            <CardMedia
-              sx={{
-                width: "30px",
-                height: "30px",
-                borderRadius: "15px"
-              }}
-              component="img"
-              image={pokeData['types'][0]['image']}
-            />
-            <Typography>
-              {pokeData['types'][0]['name']}
-            </Typography>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              textAlign: "center",
-              margin: "2px"
-            }}
-          >
-            <CardMedia sx={{
-              width: "30px",
-              height: "30px",
-              borderRadius: "15px"
-            }}
-              component="img"
-              image={pokeData['types'][1]['image']}
-            />
-            <Typography>
-              {pokeData['types'][1]['name']}
-            </Typography>
-          </div>
+        <div className='pokemon-card--type'>
+          <CardMedia
+            className='pokemon-card--type-image'
+            component="img"
+            image={pokeData['types'][1]['image']}
+          />
+          <Typography>
+            {pokeData['types'][1]['name']}
+          </Typography>
         </div>
       </div>
     </Card>
