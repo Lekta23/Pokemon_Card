@@ -41,28 +41,29 @@ class UserService {
         }
     }
 
-    async getUserByusername(username) {
+    async getUserByUsername(username, setPassword) {
         try {
-            return await admin.firestore().collection('users').where('username', '==', username).get().then((snapshot) => {
-                if (snapshot.empty) {
-                    return null;
-                } else {
-                    console.log(snapshot.docs[0].data());
-                    return {
-                        id: snapshot.docs[0].id,
-                        username: snapshot.docs[0].data().username,
-                        password: UtilsService.dehash(snapshot.docs[0].data().password, 10)
-                    };
-                }
-            });
+            const result = await admin.firestore().collection('users').where('username', '==', username).get();
+            if (result.empty) {
+                return null;
+            }
+            let password = result.docs[0].data().password;
+            const user = {
+                id: result.docs[0].id,
+                username: result.docs[0].data().username,
+                password: await UtilsService.dehash(setPassword, password)
+            };
+            console.log('userService', user);
+            return user;
         } catch (error) {
             console.log(error);
         }
     }
 
     async createUser(user) {
+        console.log('user', user);
         try {
-            user.password = UtilsService.hash(user.password);
+            user.password = await UtilsService.hash(user.password);
             return await admin.firestore().collection('users').add(JSON.parse(JSON.stringify(user)));
         } catch (error) {
             console.log(error);
@@ -71,7 +72,7 @@ class UserService {
 
     async updateUser(id, user) {
         try {
-            user.password = UtilsService.hash(user.password);
+            user.password = await UtilsService.hash(user.password);
             return await admin.firestore().collection('users').doc(id).update(JSON.parse(JSON.stringify(user)));
         } catch (error) {
             console.log(error);
@@ -87,29 +88,39 @@ class UserService {
     }
 
     async loginUser(username, password) {
+        console.log('ouais', username, password);
         if (username === undefined || password === undefined) {
             return {
                 error: 'username or password is undefined'
             };
         }
-        const user = await this.getUserByusername(username);
+        const user = await this.getUserByUsername(username, password);
+        console.log('user', user);
         if (user === null) {
             console.log('user not found');
             await this.createUser(new User({
                 username: username,
-                password: UtilsService.hash(password)
+                password: password
             }));
-            await tokenService.updateToken(username);
-            return user;
+            const token = tokenService.updateToken(username);
+            return token;
         }
-        console.log(user, password);
-        if (user.password === password) {
+
+        if (user.password === true) {
             console.log('user found');
-            tokenService.updateToken(username);
-            return user;
+            const token = tokenService.updateToken(username);
+            return token;
         }
         return {
             error: 'wrong password'
+        };
+    }
+
+    async disconnectUser(token) {
+        console.log(token);
+        await tokenService.deleteToken(token);
+        return {
+            message: 'user disconnected'
         };
     }
 }
