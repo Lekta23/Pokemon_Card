@@ -36,6 +36,7 @@ const PokemonCard = () => {
       "vit": 120
     }
   }
+  
   return (
     <Card className='pokemon-card'>
       <div className='pokemon-card--header'>
@@ -58,7 +59,7 @@ const PokemonCard = () => {
           image={pokeData['sprites']['regular']}
         />
       </div>
-      
+
       <div className='center'>
         <div className='pokemon-card--type'>
           <CardMedia
@@ -66,6 +67,7 @@ const PokemonCard = () => {
             component="img"
             image={pokeData['types'][0]['image']}
           />
+          
           <Typography>
             {pokeData['types'][0]['name']}
           </Typography>
@@ -77,6 +79,7 @@ const PokemonCard = () => {
             component="img"
             image={pokeData['types'][1]['image']}
           />
+
           <Typography>
             {pokeData['types'][1]['name']}
           </Typography>
