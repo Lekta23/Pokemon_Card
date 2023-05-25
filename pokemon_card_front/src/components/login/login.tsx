@@ -12,7 +12,7 @@ const Login = () => {
   const loginService: ILoginService = new LoginService();
 
   const handleLogin = async () => {
-    navigate("/");
+    navigate("/home");
     const token = await loginService.sendLogin(username, password);
     localStorage.setItem("token", token);
   };
