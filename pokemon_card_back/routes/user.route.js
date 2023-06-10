@@ -23,6 +23,8 @@ router.post('/', async (req, res) => {
         username: req.body.username,
         password: req.body.password
     });
+    console.log('here');
+    console.log(user);
     const newUser = await UserService.createUser(user);
     res.json(newUser);
 });
