@@ -14,7 +14,7 @@ class UserService {
                     return {
                         id: doc.id,
                         username: doc.data().username,
-                        password: UtilsService.dehash(doc.data().password, 10)
+                        password: doc.data().password
                     };
                 });
             });
@@ -30,7 +30,7 @@ class UserService {
                     return {
                         id: doc.id,
                         username: doc.data().username,
-                        password: UtilsService.dehash(doc.data().password, 10)
+                        password: doc.data().password
                     };
                 } else {
                     return null;
@@ -51,7 +51,7 @@ class UserService {
             const user = {
                 id: result.docs[0].id,
                 username: result.docs[0].data().username,
-                password: await UtilsService.dehash(setPassword, password)
+                password: UtilsService.dehash(setPassword, password)
             };
             console.log('userService', user);
             return user;
