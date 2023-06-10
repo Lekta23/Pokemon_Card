@@ -7,36 +7,50 @@ const mongoose = require('mongoose');
 
 const User = require('../models/user.model');
 
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
     const users = await UserService.getAllUsers();
     res.json(users);
 });
 
-router.get('/users/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const user = await UserService.getUserById(req.params.id);
     res.json(user);
 });
 
-router.post('/users', async (req, res) => {
+router.post('/', async (req, res) => {
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
-        email: req.body.email,
+        username: req.body.username,
         password: req.body.password
     });
     const newUser = await UserService.createUser(user);
     res.json(newUser);
 });
 
-router.put('/users/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     const user = {
-        email: req.body.email,
+        username: req.body.username,
         password: req.body.password
     };
     const updatedUser = await UserService.updateUser(req.params.id, user);
     res.json(updatedUser);
 });
 
-router.delete('/users/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     const deletedUser = await UserService.deleteUser(req.params.id);
     res.json(deletedUser);
 });
+
+router.post('/login', async (req, res) => {
+    console.log(req.body.username, req.body.password);
+    const user = await UserService.loginUser(req.body.username, req.body.password);
+    res.json(user);
+});
+
+router.post('/disconnect', async (req, res) => {
+    console.log(req.body.token);
+    const user = await UserService.disconnectUser(req.body.token);
+    res.json(user);
+});
+
+module.exports = router;
