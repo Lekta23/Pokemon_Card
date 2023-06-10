@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
         _idPokedex: req.body._idPokedex,
         generation: req.body.generation,
         name: req.body.name,
-        type: req.body.type,
+        types: req.body.types,
         stats: req.body.stats
     });
     const newPokemon = await PokemonService.createPokemon(pokemon);

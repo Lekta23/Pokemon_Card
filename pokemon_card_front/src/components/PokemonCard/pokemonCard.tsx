@@ -1,92 +1,87 @@
-import React from 'react';
+import React from "react";
 
-import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
-import CardMedia from '@mui/material/CardMedia';
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import CardMedia from "@mui/material/CardMedia";
 
-import './pokemonCardStyle.css';
+import "./pokemonCardStyle.css";
 
-const PokemonCard = () => {
+const PokemonCard = (props: any) => {
+  console.log(props);
+
   const pokeData = {
-    "pokedexId": 25,
-    "generation": 1,
-    "name": {
-      "fr": "Pikachu",
-      "en": "Pikachu(en)"
+    pokedexId: 25,
+    generation: 1,
+    name: {
+      fr: "Pikachu",
+      en: "Pikachu(en)",
     },
-    "sprites": {
-      "regular": "https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/25/regular.png",
+    sprites: {
+      regular:
+        "https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/25/regular.png",
     },
-    "types": [
+    types: [
       {
-        "name": "Électrik",
-        "image": "https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/electrik.png"
+        name: "Électrik",
+        image:
+          "https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/electrik.png",
       },
       {
-        "name": "Eau",
-        "image": "https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/eau.png"
+        name: "Eau",
+        image:
+          "https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/eau.png",
       },
     ],
-    "stats": {
-      "hp": 45,
-      "atk": 80,
-      "def": 50,
-      "spe_atk": 75,
-      "spe_def": 60,
-      "vit": 120
-    }
-  }
-  
-  return (
-    <Card className='pokemon-card'>
-      <div className='pokemon-card--header'>
-        <Typography>
-          ID : {pokeData['pokedexId']}
-        </Typography>
+    stats: {
+      hp: 45,
+      atk: 80,
+      def: 50,
+      spe_atk: 75,
+      spe_def: 60,
+      vit: 120,
+    },
+  };
 
-        <Typography>
-          Gen : {pokeData['generation']}
-        </Typography>
+  return (
+    <Card className="pokemon-card">
+      <div className="pokemon-card--header">
+        <Typography>ID : {props._idPokedex}</Typography>
+
+        <Typography>Gen : {props.generation}</Typography>
       </div>
 
-      <Typography className='center'>
-        {pokeData['name']['fr']} ({pokeData['name']['en']})
-      </Typography>
+      <Typography className="center">{props.name}</Typography>
 
-      <div className='pokemon-card--sprite'>
+      <div className="pokemon-card--sprite">
         <CardMedia
           component="img"
-          image={pokeData['sprites']['regular']}
+          image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/${props._idPokedex}/regular.png`}
         />
       </div>
 
-      <div className='center'>
-        <div className='pokemon-card--type'>
+      <div className="center">
+        <div className="pokemon-card--type">
           <CardMedia
-            className='pokemon-card--type-image'
+            className="pokemon-card--type-image"
             component="img"
-            image={pokeData['types'][0]['image']}
+            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${props.types[0]}.png`}
           />
-          
-          <Typography>
-            {pokeData['types'][0]['name']}
-          </Typography>
+
+          <Typography>{props.types[0]}</Typography>
         </div>
 
-        <div className='pokemon-card--type'>
+        <div className="pokemon-card--type">
           <CardMedia
-            className='pokemon-card--type-image'
+            className="pokemon-card--type-image"
             component="img"
-            image={pokeData['types'][1]['image']}
+            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${props.types[1]}.png`}
           />
 
-          <Typography>
-            {pokeData['types'][1]['name']}
-          </Typography>
+          <Typography>{props.types[1]}</Typography>
         </div>
       </div>
     </Card>
   );
-}
+};
 
 export default PokemonCard;

@@ -3,7 +3,7 @@ const admin = require('../firebase').admin;
 
 class PokemonService {
 
-    async  getAllPokemons() {
+    async getAllPokemons() {
         try {
             return admin.firestore().collection('pokemons').get().then((snapshot) => {
                 return snapshot.docs.map(doc => {
@@ -12,7 +12,7 @@ class PokemonService {
                         _idPokedex: doc.data()._idPokedex,
                         generation: doc.data().generation,
                         name: doc.data().name,
-                        type: doc.data().type,
+                        types: doc.data().types,
                         stats: doc.data().stats
                     };
                 });
@@ -22,7 +22,7 @@ class PokemonService {
         }
     }
 
-    async  getPokemonById(id) {
+    async getPokemonById(id) {
         try {
             return admin.firestore().collection('pokemons').doc(id).get().then((doc) => {
                 if (doc.exists) {
@@ -31,7 +31,7 @@ class PokemonService {
                         _idPokedex: doc.data()._idPokedex,
                         generation: doc.data().generation,
                         name: doc.data().name,
-                        type: doc.data().type,
+                        types: doc.data().types,
                         stats: doc.data().stats
                     };
                 } else {
@@ -43,7 +43,7 @@ class PokemonService {
         }
     }
 
-    async  createPokemon(pokemon) {
+    async createPokemon(pokemon) {
         console.log(pokemon);
         try {
             return admin.firestore().collection('pokemons').add(JSON.parse(JSON.stringify(pokemon))).then((doc) => {
