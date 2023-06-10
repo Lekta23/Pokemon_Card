@@ -1,7 +1,6 @@
 # Pokemon_Card
 
 Pokemon_Card is a little project create to learn and practice 2 frameworks :
-
 - Front : React
 - Back : Node JS + Express
 
