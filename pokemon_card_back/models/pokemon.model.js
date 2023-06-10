@@ -11,7 +11,7 @@ const pokemonSchema = mongoose.Schema({
         required: true
     },
     name: {
-        type: Object,
+        type: String,
         required: true
     },
     // type de type Array de string
