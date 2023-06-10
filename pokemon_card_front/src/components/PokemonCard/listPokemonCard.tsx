@@ -1,7 +1,13 @@
 import PokemonCard from "./pokemonCard";
-// se composant retourne une liste de pokemonCard en fonction de la liste de pokemon passé en paramètre chaque element de la liste sera le parametre de pokemonCard
+import "./listPokemonCardStyle.css";
 const listPokemonCard = (props: any) => {
   console.log(props.listPokemon);
+
+  const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const button: HTMLButtonElement = event.currentTarget;
+    console.log(button.value);
+  };
 
   return (
     <div className="pokemon-card--list">
@@ -14,6 +20,7 @@ const listPokemonCard = (props: any) => {
             name={pokemon.name}
             types={pokemon.types}
             stats={pokemon.stats}
+            onClick={buttonHandler}
           />
         );
       })}
