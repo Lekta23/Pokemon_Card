@@ -4,9 +4,12 @@ const mongoose = require('mongoose');
 
 const Pokemon = require('../models/pokemon.model');
 const PokemonService = require('../services/pokemon.service');
+const UserService = require('../services/user.service');
 
 router.get('/', async (req, res) => {
-    const pokemons = await PokemonService.getAllPokemons();
+    const token = req.headers.authorization.split(' ')[1];
+    const idUser = await UserService.getUserId(token);
+    const pokemons = await PokemonService.getAllPokemons(idUser);
     res.json(pokemons);
 });
 
@@ -21,7 +24,8 @@ router.post('/', async (req, res) => {
         generation: req.body.generation,
         name: req.body.name,
         types: req.body.types,
-        stats: req.body.stats
+        stats: req.body.stats,
+        idUser: req.body.idUser
     });
     const newPokemon = await PokemonService.createPokemon(pokemon);
     res.json(newPokemon);

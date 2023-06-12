@@ -49,7 +49,13 @@ const PokemonCard = (props: any) => {
   }
 
   return (
-    <Card className="pokemon-card">
+    <Card
+      className="pokemon-card"
+      onClick={(event: React.MouseEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        console.log(props._idPokedex);
+      }}
+    >
       <div className="pokemon-card--header">
         <Typography>ID : {props._idPokedex}</Typography>
 

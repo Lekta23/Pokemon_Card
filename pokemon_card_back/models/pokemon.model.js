@@ -23,6 +23,10 @@ const pokemonSchema = mongoose.Schema({
         type: Object,
         required: true
     },
+    idUser: {
+        type: String,
+        required: true
+    },
 });
 
 module.exports = mongoose.model('Pokemon', pokemonSchema);

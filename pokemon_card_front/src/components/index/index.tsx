@@ -14,15 +14,20 @@ const Index = () => {
   const navigate = useNavigate();
   const [listPokemon, setlistPokemon] = useState<Array<IPokemon>>([]);
   useEffect(() => {
+    console.log("useEffect");
+    console.log(localStorage.getItem("token"));
     axios
-      .get("http://localhost:5000/pokemons")
+      .get("http://localhost:5000/pokemons", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
         console.log(Array.isArray(response.data));
         setlistPokemon(response.data);
         console.log(listPokemon);
-        console.log(Array.isArray(listPokemon));        
-        
+        console.log(Array.isArray(listPokemon));
       })
       .catch((error) => {
         console.log(error);
