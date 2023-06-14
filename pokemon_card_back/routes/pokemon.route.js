@@ -14,7 +14,10 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const pokemon = await PokemonService.getPokemonById(req.params.id);
+    //recuperer le pokemon par son id qui est dans l'URL
+    const _id = req.params.id;
+    const pokemon = await PokemonService.getPokemonById(_id);
+    console.log(pokemon);
     res.json(pokemon);
 });
 

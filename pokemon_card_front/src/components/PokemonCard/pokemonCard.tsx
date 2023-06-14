@@ -5,8 +5,9 @@ import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 
 import "./pokemonCardStyle.css";
+import IPokemon from "../../interfaces/pokemon/pokemon.interface";
 
-const PokemonCard = (props: any) => {
+const PokemonCard = (props: IPokemon) => {
   console.log(props);
   let types = <div></div>;
 
@@ -52,8 +53,9 @@ const PokemonCard = (props: any) => {
     <Card
       className="pokemon-card"
       onClick={(event: React.MouseEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        console.log(props._idPokedex);
+        console.log(props._id);
+
+        window.location.href = `/detailPokemon/${props._id}`;
       }}
     >
       <div className="pokemon-card--header">

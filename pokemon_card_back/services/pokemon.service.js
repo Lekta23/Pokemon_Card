@@ -25,9 +25,9 @@ class PokemonService {
         }
     }
 
-    async getPokemonById(id, idUser) {
+    async getPokemonById(id) {
         try {
-            return admin.firestore().collection('pokemons').doc(id).where('idUser', '==', idUser).get().then((doc) => {
+            return admin.firestore().collection('pokemons').doc(id).get().then((doc) => {
                 return {
                     id: doc.id,
                     _idPokedex: doc.data()._idPokedex,
@@ -35,7 +35,6 @@ class PokemonService {
                     name: doc.data().name,
                     types: doc.data().types,
                     stats: doc.data().stats,
-
                 };
             });
         } catch (error) {

@@ -7,7 +7,7 @@ const listPokemonCard = (props: any) => {
       {props.listPokemon.map((pokemon: any) => {
         return (
           <PokemonCard
-            key={pokemon.id}
+            _id={pokemon.id}
             _idPokedex={pokemon._idPokedex}
             generation={pokemon.generation}
             name={pokemon.name}

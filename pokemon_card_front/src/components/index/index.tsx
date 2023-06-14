@@ -47,7 +47,6 @@ const Index = () => {
         >
           Se deconnecter
         </Button>
-        {/* <ListPokemonCard {...listPokemon} />; */}
         <ListPokemonCard listPokemon={listPokemon} />
       </div>
     );
