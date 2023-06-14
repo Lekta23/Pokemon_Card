@@ -3,47 +3,46 @@ const admin = require('../firebase').admin;
 
 class PokemonService {
 
-    async  getAllPokemons() {
+
+    async getAllPokemons(idUser) {
         try {
-            return admin.firestore().collection('pokemons').get().then((snapshot) => {
-                return snapshot.docs.map(doc => {
-                    return {
+            return admin.firestore().collection('pokemons').where('idUser', '==', idUser).get().then((querySnapshot) => {
+                let pokemons = [];
+                querySnapshot.forEach((doc) => {
+                    pokemons.push({
                         id: doc.id,
                         _idPokedex: doc.data()._idPokedex,
                         generation: doc.data().generation,
                         name: doc.data().name,
-                        type: doc.data().type,
-                        stats: doc.data().stats
-                    };
+                        types: doc.data().types,
+                        stats: doc.data().stats,
+                    });
                 });
+                return pokemons;
             });
         } catch (error) {
             console.log(error);
         }
     }
 
-    async  getPokemonById(id) {
+    async getPokemonById(id) {
         try {
             return admin.firestore().collection('pokemons').doc(id).get().then((doc) => {
-                if (doc.exists) {
-                    return {
-                        id: doc.id,
-                        _idPokedex: doc.data()._idPokedex,
-                        generation: doc.data().generation,
-                        name: doc.data().name,
-                        type: doc.data().type,
-                        stats: doc.data().stats
-                    };
-                } else {
-                    return null;
-                }
+                return {
+                    id: doc.id,
+                    _idPokedex: doc.data()._idPokedex,
+                    generation: doc.data().generation,
+                    name: doc.data().name,
+                    types: doc.data().types,
+                    stats: doc.data().stats,
+                };
             });
         } catch (error) {
             console.log(error);
         }
     }
 
-    async  createPokemon(pokemon) {
+    async createPokemon(pokemon) {
         console.log(pokemon);
         try {
             return admin.firestore().collection('pokemons').add(JSON.parse(JSON.stringify(pokemon))).then((doc) => {

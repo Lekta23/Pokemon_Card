@@ -12,9 +12,9 @@ const Login = () => {
   const loginService: ILoginService = new LoginService();
 
   const handleLogin = async () => {
-    navigate("/home");
     const token = await loginService.sendLogin(username, password);
     localStorage.setItem("token", token);
+    navigate("/home");
   };
 
   return (
@@ -45,7 +45,7 @@ const Login = () => {
           label="Username"
           variant="outlined"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e : any) => setUsername(e.target.value)}
         />
         <TextField
           id="password"
@@ -53,7 +53,7 @@ const Login = () => {
           type="password"
           variant="outlined"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e : any) => setPassword(e.target.value)}
         />
         <Button type="submit" variant="contained">
           Login

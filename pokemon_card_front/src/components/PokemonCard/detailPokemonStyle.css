@@ -1,0 +1,25 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.alignCenterItem {
+    align-items: center;
+}
+
+
+.pokemon-card--sprite {
+    width: 250px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+}

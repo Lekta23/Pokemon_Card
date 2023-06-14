@@ -41,13 +41,15 @@ class UserService {
         }
     }
 
-    async getUserByUsername(username, setPassword) {
+    async getUserByUsernameAndPassword(username, setPassword) {
         try {
+            console.log('username', username);
+            console.log('password', setPassword);
             const result = await admin.firestore().collection('users').where('username', '==', username).get();
             if (result.empty) {
                 return null;
             }
-            let password = result.docs[0].data().password;
+            const password = result.docs[0].data().password;
             const user = {
                 id: result.docs[0].id,
                 username: result.docs[0].data().username,
@@ -55,6 +57,20 @@ class UserService {
             };
             console.log('userService', user);
             return user;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getUserByUsername(username) {
+        try {
+            const result = await admin.firestore().collection('users').where('username', '==', username).get();
+            if (result.empty) {
+                return null;
+            }
+            return {
+                id: result.docs[0].id,
+            };
         } catch (error) {
             console.log(error);
         }
@@ -94,7 +110,7 @@ class UserService {
                 error: 'username or password is undefined'
             };
         }
-        const user = await this.getUserByUsername(username, password);
+        const user = await this.getUserByUsernameAndPassword(username, password);
         console.log('user', user);
         if (user === null) {
             console.log('user not found');
@@ -122,6 +138,15 @@ class UserService {
         return {
             message: 'user disconnected'
         };
+    }
+
+    async getUserId(token) {
+        console.log('token', token);
+        const username = await tokenService.getUsername(token);
+        console.log('username', username);
+        const user = await this.getUserByUsername(username);
+        console.log('user', user);
+        return user.id;
     }
 }
 

@@ -11,16 +11,20 @@ const pokemonSchema = mongoose.Schema({
         required: true
     },
     name: {
-        type: Object,
+        type: String,
         required: true
     },
     // type de type Array de string
-    type: {
+    types: {
         type: Object,
         required: true
     },
     stats: {
         type: Object,
+        required: true
+    },
+    idUser: {
+        type: String,
         required: true
     },
 });

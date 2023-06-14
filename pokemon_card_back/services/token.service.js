@@ -21,7 +21,7 @@ class TokenService {
                 const token = this.generateToken();
                 await admin.firestore().collection('tokens').doc(snapshot.docs[0].id).update({
                     token: token
-                }); 
+                });
                 return token;
             }
         });
@@ -33,6 +33,17 @@ class TokenService {
                 return null;
             } else {
                 return admin.firestore().collection('tokens').doc(snapshot.docs[0].id).delete();
+            }
+        });
+    }
+
+
+    async getUsername(token) {
+        return await admin.firestore().collection('tokens').where('token', '==', token).get().then((snapshot) => {
+            if (snapshot.empty) {
+                return null;
+            } else {
+                return snapshot.docs[0].data().username;
             }
         });
     }
