@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Pokemon = require('../models/pokemon.model');
 const PokemonService = require('../services/pokemon.service');
 const UserService = require('../services/user.service');
+const tokenService = require('../services/token.service');
 
 router.get('/', async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
@@ -22,13 +23,15 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    console.log(req.body.token);
+    const idUser = await UserService.getUserId(req.body.token);
     const pokemon = new Pokemon({
         _idPokedex: req.body._idPokedex,
         generation: req.body.generation,
         name: req.body.name,
         types: req.body.types,
         stats: req.body.stats,
-        idUser: req.body.idUser
+        idUser: idUser
     });
     const newPokemon = await PokemonService.createPokemon(pokemon);
     res.json(newPokemon);

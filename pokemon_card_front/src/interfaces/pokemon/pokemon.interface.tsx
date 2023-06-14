@@ -1,5 +1,5 @@
 interface IPokemon {
-  _id: any;
+  _id: string;
   _idPokedex: number;
   generation: number;
   name: string;

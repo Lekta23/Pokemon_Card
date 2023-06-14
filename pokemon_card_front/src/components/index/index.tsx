@@ -8,6 +8,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import IPokemon from "../../interfaces/pokemon/pokemon.interface";
 import ListPokemonCard from "../PokemonCard/listPokemonCard";
+import "./index.css";
 
 const Index = () => {
   const disconnectService: IDisconnectService = new DisconnectService();
@@ -23,11 +24,7 @@ const Index = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
-        console.log(Array.isArray(response.data));
         setlistPokemon(response.data);
-        console.log(listPokemon);
-        console.log(Array.isArray(listPokemon));
       })
       .catch((error) => {
         console.log(error);
@@ -36,7 +33,26 @@ const Index = () => {
   if (listPokemon) {
     return (
       <div>
-        <h1>Index</h1>
+        <div className="flexRow">
+          <h1>Index</h1>
+          <Button
+            variant="contained"
+            onClick={() => {
+              console.log("click");
+              disconnectService.disconnect(localStorage.getItem("token")!);
+              navigate("/login");
+            }}
+          >
+            Se deconnecter
+          </Button>
+        </div>
+        <br />
+        <ListPokemonCard listPokemon={listPokemon} />
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <Button
           variant="contained"
           onClick={() => {
@@ -47,11 +63,9 @@ const Index = () => {
         >
           Se deconnecter
         </Button>
-        <ListPokemonCard listPokemon={listPokemon} />
+        <h1>Chargement</h1>;
       </div>
     );
-  } else {
-    return <h1>Chargement</h1>;
   }
 };
 

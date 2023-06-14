@@ -1,23 +1,35 @@
 import React from "react";
 
 import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
 
 import "./pokemonCardStyle.css";
 import IPokemon from "../../interfaces/pokemon/pokemon.interface";
+import IconButton from "@mui/material/IconButton/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import Typography from "@mui/material/Typography";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
+// mettre tout en minuscule
+const lowercase = (str: string) => {
+  return str.toLowerCase();
+};
 
 const PokemonCard = (props: IPokemon) => {
   console.log(props);
   let types = <div></div>;
 
-  if (props.types[1] === undefined) {
+  if (props.types[1] === "") {
     types = (
       <div className="pokemon-card--type">
         <CardMedia
           className="pokemon-card--type-image"
           component="img"
-          image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${props.types[0]}.png`}
+          image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${lowercase(
+            props.types[0]
+          )}.png`}
         />
 
         <Typography>{props.types[0]}</Typography>
@@ -30,7 +42,9 @@ const PokemonCard = (props: IPokemon) => {
           <CardMedia
             className="pokemon-card--type-image"
             component="img"
-            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${props.types[0]}.png`}
+            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${lowercase(
+              props.types[0]
+            )}.png`}
           />
 
           <Typography>{props.types[0]}</Typography>
@@ -40,7 +54,9 @@ const PokemonCard = (props: IPokemon) => {
           <CardMedia
             className="pokemon-card--type-image"
             component="img"
-            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${props.types[1]}.png`}
+            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${lowercase(
+              props.types[1]
+            )}.png`}
           />
 
           <Typography>{props.types[1]}</Typography>
@@ -50,14 +66,7 @@ const PokemonCard = (props: IPokemon) => {
   }
 
   return (
-    <Card
-      className="pokemon-card"
-      onClick={(event: React.MouseEvent<HTMLDivElement>) => {
-        console.log(props._id);
-
-        window.location.href = `/detailPokemon/${props._id}`;
-      }}
-    >
+    <Card className="pokemon-card">
       <div className="pokemon-card--header">
         <Typography>ID : {props._idPokedex}</Typography>
 
@@ -73,6 +82,39 @@ const PokemonCard = (props: IPokemon) => {
         />
       </div>
       {types}
+      <CardActions disableSpacing>
+        <IconButton
+          aria-label="detail"
+          onClick={() => {
+            window.location.href = `/detailPokemon/${props._id}`;
+          }}
+        >
+          <VisibilityIcon />
+        </IconButton>
+        <IconButton
+          aria-label="edit"
+          onClick={() => {
+            window.location.href = `/editPokemon/${props._id}`;
+          }}
+        >
+          <ModeEditIcon />
+        </IconButton>
+        <IconButton
+          aria-label="delete"
+          onClick={() => {
+            fetch(`http://localhost:5000/pokemons/${props._id}`, {
+              method: "DELETE",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data);
+                window.location.reload();
+              });
+          }}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </CardActions>
     </Card>
   );
 };

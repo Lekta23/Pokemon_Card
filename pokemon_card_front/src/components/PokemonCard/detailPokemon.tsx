@@ -4,18 +4,20 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import IPokemon from "../../interfaces/pokemon/pokemon.interface";
 import "./detailPokemonStyle.css";
-import { ImageList } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const DetailPokemon = () => {
+  const lowercase = (str: string) => {
+    return str.toLowerCase();
+  };
+
   const { _id } = useParams();
   console.log(_id);
   const [pokemon, setPokemon] = useState<IPokemon>();
   const stats = pokemon?.stats;
-  const urlImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon?._idPokedex}.png`;
 
   // transforme stats en tableau
   const statsArray = Object.entries(stats ?? {});
@@ -33,13 +35,15 @@ const DetailPokemon = () => {
   let types = <div></div>;
 
   if (pokemon?.types !== undefined) {
-    if (pokemon?.types[1] === undefined) {
+    if (pokemon?.types[1] === "") {
       types = (
         <div className="row">
           <CardMedia
             className="pokemon-card--type-image"
             component="img"
-            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${pokemon?.types[0]}.png`}
+            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${lowercase(
+              pokemon?.types[0]
+            )}.png`}
           />
 
           <Typography>{pokemon?.types[0]}</Typography>
@@ -52,7 +56,9 @@ const DetailPokemon = () => {
             <CardMedia
               className="pokemon-card--type-image"
               component="img"
-              image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${pokemon?.types[0]}.png`}
+              image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${lowercase(
+                pokemon?.types[0]
+              )}.png`}
             />
 
             <Typography>{pokemon?.types[0]}</Typography>
@@ -62,7 +68,9 @@ const DetailPokemon = () => {
             <CardMedia
               className="pokemon-card--type-image"
               component="img"
-              image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${pokemon?.types[1]}.png`}
+              image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/${lowercase(
+                pokemon?.types[1]
+              )}.png`}
             />
 
             <Typography>{pokemon?.types[1]}</Typography>
