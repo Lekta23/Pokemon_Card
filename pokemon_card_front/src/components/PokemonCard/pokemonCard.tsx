@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import Typography from "@mui/material/Typography";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { colorTypeGradients } from "../../utils/colorType";
 
 // mettre tout en minuscule
 const lowercase = (str: string) => {
@@ -19,6 +20,15 @@ const lowercase = (str: string) => {
 
 const PokemonCard = (props: IPokemon) => {
   console.log(props);
+  let finalColor;
+
+  if (props.types.length === 2) {
+    console.log(props.types[0], props.types[1]);
+    finalColor = colorTypeGradients(props.types[0], props.types[1], 2);
+  } else {
+    console.log(props.types[0]);
+    finalColor = colorTypeGradients(props.types[0], props.types[0], 1);
+  }
   let types = <div></div>;
 
   if (props.types[1] === "") {
@@ -66,7 +76,12 @@ const PokemonCard = (props: IPokemon) => {
   }
 
   return (
-    <Card className="pokemon-card">
+    <Card
+      className="pokemon-card"
+      style={{
+        background: `linear-gradient(${finalColor[0]}, ${finalColor[1]})`,
+      }}
+    >
       <div className="pokemon-card--header">
         <Typography>ID : {props._idPokedex}</Typography>
 

@@ -15,8 +15,6 @@ const Index = () => {
   const navigate = useNavigate();
   const [listPokemon, setlistPokemon] = useState<Array<IPokemon>>([]);
   useEffect(() => {
-    console.log("useEffect");
-    console.log(localStorage.getItem("token"));
     axios
       .get("http://localhost:5000/pokemons", {
         headers: {
@@ -33,9 +31,10 @@ const Index = () => {
   if (listPokemon) {
     return (
       <div>
-        <div className="flexRow">
-          <h1>Index</h1>
+        <div className="flexRow marginDiv">
+          <h1>Mon Pokedex</h1>
           <Button
+            className="marginButton"
             variant="contained"
             onClick={() => {
               console.log("click");

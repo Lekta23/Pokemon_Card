@@ -4,3 +4,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.marginButton {
+    margin: 10px;
+}
+
+.marginDiv {
+    margin: 10px;
+}

@@ -3,6 +3,9 @@ import { MenuItem } from "@mui/material";
 const initListType = () => {
   // list des types en francais en objet menuItems
   const list = [
+    <MenuItem key={"None"} value={""}>
+      Pas de type
+    </MenuItem>,
     <MenuItem key={"Acier1"} value={"Acier"}>
       Acier
     </MenuItem>,
@@ -51,7 +54,7 @@ const initListType = () => {
     <MenuItem key={"Spectre16"} value={"Spectre"}>
       Spectre
     </MenuItem>,
-    <MenuItem key={"Ténèbres17"} value={"Ténèbres"}>
+    <MenuItem key={"Ténèbres17"} value={"Tenebres"}>
       Ténèbres
     </MenuItem>,
     <MenuItem key={"Vol18"} value={"Vol"}>

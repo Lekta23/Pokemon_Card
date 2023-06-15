@@ -1,5 +1,4 @@
 .pokemon-card {
-    background: linear-gradient(to bottom right, rgb(255, 255, 82, 0.7), rgb(64, 64, 255, 0.7));
     box-shadow: 3px, 3px, black;
     border-radius: 100px;
     width: 270px;

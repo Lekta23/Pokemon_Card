@@ -14,6 +14,7 @@ import {
 import initListType from "../../utils/initListType";
 import { useParams } from "react-router-dom";
 import IPokemon from "../../interfaces/pokemon/pokemon.interface";
+import "./editPokemonStyle.css";
 
 const EditPokemon = () => {
   const { _id } = useParams();
@@ -77,15 +78,15 @@ const EditPokemon = () => {
 
   return (
     <Grid container>
-      <Grid container direction="row" justifyContent={"space-between"}>
-        <h1>Ajouter un pokemon dans votre pokedex</h1>
+      <div className="flexRow marginDiv">
+        <h1>Editer un pokemon dans votre pokedex</h1>
         <Button
           variant="contained"
           onClick={() => (window.location.href = "/home")}
         >
           Retour
         </Button>
-      </Grid>
+      </div>
       <Grid container>
         <Grid
           container
@@ -94,6 +95,7 @@ const EditPokemon = () => {
           direction="row"
           justifyContent="center"
           alignItems="center"
+          className="cardEdit"
         >
           <Grid
             container

@@ -1,17 +1,14 @@
-import React, { ChangeEventHandler, useState } from "react";
+import React, { useState } from "react";
 import {
   CardMedia,
   Container,
   Grid,
-  InputLabel,
-  MenuItem,
   Select,
   TextField,
-  Typography,
   Button,
-  FormControl,
 } from "@mui/material";
 import initListType from "../../utils/initListType";
+import "./addPokemonStyle.css";
 
 const AddPokemon = () => {
   const listType: Array<any> = initListType();
@@ -32,7 +29,15 @@ const AddPokemon = () => {
 
   return (
     <Grid container>
-      <h1>Ajouter un pokemon dans votre pokedex</h1>
+      <Grid container direction="row" justifyContent={"space-between"} className="marginDiv">
+        <h1>Ajouter un pokemon dans votre pokedex</h1>
+        <Button
+          variant="contained"
+          onClick={() => (window.location.href = "/home")}
+        >
+          Retour
+        </Button>
+      </Grid>
       <Grid container>
         <Grid
           container
@@ -41,6 +46,7 @@ const AddPokemon = () => {
           direction="row"
           justifyContent="center"
           alignItems="center"
+          className="cardAdd"
         >
           <Grid
             container
@@ -54,6 +60,7 @@ const AddPokemon = () => {
               id="outlined-basic"
               label="ID Pokedex"
               variant="outlined"
+              className="marginInput"
               type="number"
               required
               value={_idPokedex}
@@ -63,6 +70,7 @@ const AddPokemon = () => {
               }}
             />
             <TextField
+              className="marginInput"
               id="outlined-basic"
               label="Nom du pokemon"
               variant="outlined"
@@ -75,6 +83,7 @@ const AddPokemon = () => {
               id="outlined-basic"
               label="Generation"
               variant="outlined"
+              className="marginInput"
               type="number"
               value={generation}
               onChange={(e: any) => {
@@ -93,6 +102,7 @@ const AddPokemon = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={type1}
+                className="marginInput"
                 label="Type 1"
                 onChange={(e) => {
                   setType1(e.target.value);
@@ -105,6 +115,7 @@ const AddPokemon = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
+                className="marginInput"
                 value={type2}
                 label="Type 2"
                 onChange={(e) => {
@@ -163,6 +174,7 @@ const AddPokemon = () => {
               id="outlined-basic"
               label="HP"
               variant="outlined"
+              className="marginInput"
               type="number"
               value={hp}
               onChange={(e: any) => {
@@ -182,6 +194,7 @@ const AddPokemon = () => {
             <TextField
               id="outlined-basic"
               label="Defense"
+              className="marginInput"
               variant="outlined"
               type="number"
               value={defense}
@@ -193,6 +206,7 @@ const AddPokemon = () => {
               id="outlined-basic"
               label="Attaque Spéciale"
               variant="outlined"
+              className="marginInput"
               type="number"
               value={specialAttack}
               onChange={(e: any) => {
@@ -203,6 +217,7 @@ const AddPokemon = () => {
               id="outlined-basic"
               label="Defense Spéciale"
               variant="outlined"
+              className="marginInput"
               type="number"
               value={specialDefense}
               onChange={(e: any) => {
@@ -214,6 +229,7 @@ const AddPokemon = () => {
               label="Vitesse"
               variant="outlined"
               type="number"
+              className="marginInput"
               value={speed}
               onChange={(e: any) => {
                 setSpeed(Number(e.currentTarget.value));

@@ -8,6 +8,8 @@ import CardMedia from "@mui/material/CardMedia";
 import IPokemon from "../../interfaces/pokemon/pokemon.interface";
 import "./detailPokemonStyle.css";
 import Typography from "@mui/material/Typography";
+import { colorTypeGradients } from "../../utils/colorType";
+import { Button, Grid } from "@mui/material";
 
 const DetailPokemon = () => {
   const lowercase = (str: string) => {
@@ -18,6 +20,13 @@ const DetailPokemon = () => {
   console.log(_id);
   const [pokemon, setPokemon] = useState<IPokemon>();
   const stats = pokemon?.stats;
+  let finalColor;
+
+  if (pokemon?.types.length === 2) {
+    finalColor = colorTypeGradients(pokemon?.types[0], pokemon?.types[1], 2);
+  } else {
+    finalColor = colorTypeGradients(pokemon?.types[0], pokemon?.types[0], 1);
+  }
 
   // transforme stats en tableau
   const statsArray = Object.entries(stats ?? {});
@@ -81,39 +90,59 @@ const DetailPokemon = () => {
   }
 
   return (
-    <div>
-      <h1 className="alignCenter">{pokemon?.name}</h1>
-      <div className="display row">
-        <div className="pokemon-card--sprite">
-          <CardMedia
-            component="img"
-            image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/${pokemon?._idPokedex}/regular.png`}
-          />
-        </div>
+    <>
+      <div className="flexRow marginDiv">
+        <h1>Voir le pokemon</h1>
+        <Button
+          variant="contained"
+          onClick={() => (window.location.href = "/home")}
+        >
+          Retour
+        </Button>
       </div>
-      {types}
-      <div>
+      <div
+        className="cardDetail"
+        style={{
+          background: `linear-gradient(${finalColor[0]}, ${finalColor[1]})`,
+        }}
+      >
+        <h1 className="alignCenter">{pokemon?.name}</h1>
         <div className="row">
-          {statsArray.map((stat, index) => {
-            if (index > 3) {
-              return (
-                <div className="row">
-                  <h3>{stat[0]}</h3>
-                  <p>{stat[1]}</p>
-                </div>
-              );
-            } else {
-              return (
-                <div className="row">
-                  <h3>{stat[0]}</h3>
-                  <p>{stat[1]}</p>
-                </div>
-              );
-            }
-          })}
+          <div className="colunm">
+            <div className="pokemon-card--sprite">
+              <CardMedia
+                component="img"
+                image={`https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/${pokemon?._idPokedex}/regular.png`}
+              />
+            </div>
+            {types}
+          </div>
+          <div className="display column">
+            <div>
+              <div className="column">
+                {statsArray.map((stat, index) => {
+                  if (index > 3) {
+                    return (
+                      <div className="row">
+                        <h3>{stat[0]}</h3>
+                        <p>{stat[1]}</p>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className="row">
+                        <h3>{stat[0]}</h3>
+                        <p>{stat[1]}</p>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

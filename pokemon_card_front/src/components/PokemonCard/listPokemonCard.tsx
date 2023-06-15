@@ -16,7 +16,7 @@ const ListPokemonCard = (props: any) => {
       >
         Ajouter un pokemon
       </Button>
-      <Grid container>
+      <Grid container className="listCard">
         {props.listPokemon.map((pokemon: any) => {
           return (
             <PokemonCard

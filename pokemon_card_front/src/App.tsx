@@ -5,6 +5,7 @@ import Index from "./components/index";
 import DetailPokemon from "./components/PokemonCard/detailPokemon";
 import AddPokemon from "./components/PokemonCard/addPokemon";
 import EditPokemon from "./components/PokemonCard/editPokemon";
+import background from "./background.png";
 
 const App = () => {
   return (
