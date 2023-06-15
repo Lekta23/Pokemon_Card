@@ -37,7 +37,7 @@ const PokemonCard = (props: IPokemon) => {
     );
   } else {
     types = (
-      <div>
+      <div className="flexRow">
         <div className="pokemon-card--type">
           <CardMedia
             className="pokemon-card--type-image"

@@ -44,33 +44,48 @@ const EditPokemon = () => {
   const [_idPokedex, setIdPokedex] = useState<number | undefined>(
     pokemon?._idPokedex
   );
-  const [name, setName] = useState<string | undefined>(pokemon?.name);
+  const [name, setName] = useState<string | undefined>(pokemon?.name || "");
   const [generation, setGeneration] = useState<number | undefined>(
-    pokemon?.generation
+    pokemon?.generation || 1
   );
-  const [type1, setType1] = useState<string | undefined>(pokemon?.types[0]);
-  const [type2, setType2] = useState<string | undefined>(pokemon?.types[1]);
+  const [type1, setType1] = useState<string | undefined>(
+    pokemon?.types[0] || ""
+  );
+  const [type2, setType2] = useState<string | undefined>(
+    pokemon?.types[1] || ""
+  );
   const [hp, setHp] = useState<number | undefined>(pokemon?.stats.hp);
   const [attack, setAttack] = useState<number | undefined>(
-    pokemon?.stats.attack
+    pokemon?.stats.attack || 0
   );
   const [defense, setDefense] = useState<number | undefined>(
-    pokemon?.stats.defense
+    pokemon?.stats.defense || 0
   );
   const [specialAttack, setSpecialAttack] = useState<number | undefined>(
-    pokemon?.stats.specialAttack
+    pokemon?.stats.specialAttack || 0
   );
   const [specialDefense, setSpecialDefense] = useState<number | undefined>(
-    pokemon?.stats.specialDefense
+    pokemon?.stats.specialDefense || 0
   );
-  const [speed, setSpeed] = useState<number | undefined>(pokemon?.stats.speed);
+  const [speed, setSpeed] = useState<number | undefined>(
+    pokemon?.stats.speed || 0
+  );
 
   console.log(localStorage.getItem("token"));
   let imageURL = `https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/${_idPokedex}/regular.png`;
+  console.log(defense);
 
   return (
     <Grid container>
-      <h1>Ajouter un pokemon dans votre pokedex</h1>
+      <Grid container direction="row" justifyContent={"space-between"}>
+        <h1>Ajouter un pokemon dans votre pokedex</h1>
+        <Button
+          variant="contained"
+          onClick={() => (window.location.href = "/home")}
+        >
+          Retour
+        </Button>
+      </Grid>
       <Grid container>
         <Grid
           container
@@ -94,7 +109,7 @@ const EditPokemon = () => {
               variant="outlined"
               type="number"
               required
-              value={_idPokedex}
+              value={_idPokedex || 1}
               onChange={(e: any) => {
                 setIdPokedex(Number(e.currentTarget.value));
                 imageURL = `https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/${_idPokedex}/regular.png`;
@@ -104,7 +119,7 @@ const EditPokemon = () => {
               id="outlined-basic"
               label="Nom du pokemon"
               variant="outlined"
-              value={name}
+              value={name || ""}
               onChange={(e: any) => {
                 setName(e.currentTarget.value);
               }}
@@ -114,7 +129,7 @@ const EditPokemon = () => {
               label="Generation"
               variant="outlined"
               type="number"
-              value={generation}
+              value={generation || 1}
               onChange={(e: any) => {
                 setGeneration(Number(e.currentTarget.value));
               }}
@@ -130,7 +145,7 @@ const EditPokemon = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={type1}
+                value={type1 || ""}
                 label="Type 1"
                 onChange={(e) => {
                   setType1(e.target.value);
@@ -143,7 +158,7 @@ const EditPokemon = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={type2}
+                value={type2 || ""}
                 label="Type 2"
                 onChange={(e) => {
                   setType2(e.target.value);
@@ -186,7 +201,7 @@ const EditPokemon = () => {
               }}
               variant="contained"
             >
-              Ajouter le pokemon
+              Modifier le pokemon
             </Button>
           </Grid>
           <Grid
@@ -202,7 +217,7 @@ const EditPokemon = () => {
               label="HP"
               variant="outlined"
               type="number"
-              value={hp}
+              value={hp || 0}
               onChange={(e: any) => {
                 setHp(Number(e.currentTarget.value));
               }}
@@ -212,7 +227,7 @@ const EditPokemon = () => {
               label="Attaque"
               variant="outlined"
               type="number"
-              value={attack}
+              value={attack || 0}
               onChange={(e: any) => {
                 setAttack(Number(e.currentTarget.value));
               }}
@@ -222,7 +237,7 @@ const EditPokemon = () => {
               label="Defense"
               variant="outlined"
               type="number"
-              value={defense}
+              value={defense || 0}
               onChange={(e: any) => {
                 setDefense(Number(e.currentTarget.value));
               }}
@@ -232,7 +247,7 @@ const EditPokemon = () => {
               label="Attaque Spéciale"
               variant="outlined"
               type="number"
-              value={specialAttack}
+              value={specialAttack || 0}
               onChange={(e: any) => {
                 setSpecialAttack(Number(e.currentTarget.value));
               }}
@@ -242,7 +257,7 @@ const EditPokemon = () => {
               label="Defense Spéciale"
               variant="outlined"
               type="number"
-              value={specialDefense}
+              value={specialDefense || 0}
               onChange={(e: any) => {
                 setSpecialDefense(Number(e.currentTarget.value));
               }}
@@ -252,7 +267,7 @@ const EditPokemon = () => {
               label="Vitesse"
               variant="outlined"
               type="number"
-              value={speed}
+              value={speed || 0}
               onChange={(e: any) => {
                 setSpeed(Number(e.currentTarget.value));
               }}
