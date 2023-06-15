@@ -4,7 +4,7 @@
     "description": "Description de votre projet",
     "scripts": {
         "install": "cd pokemon_card_back && npm install && cd ../pokemon_card_front && npm install",
-        "start": "concurrently \"cd pokemon_card_front && npm start\" \"cd pokemon_card_back && nodemon app.js\""
+        "start": "concurrently \"cd pokemon_card_front && npm start\" \"cd pokemon_card_back && pm2 start  app.js\""
     },
     "dependencies": {
         "axios": "^1.4.0",
@@ -13,5 +13,9 @@
     "devDependencies": {
         "concurrently": "^7.6.0",
         "nodemon" : "^2.0.15"
-    }
+    },
+    "workspaces": [
+        "pokemon_card_back",
+        "pokemon_card_front"
+    ]
 }

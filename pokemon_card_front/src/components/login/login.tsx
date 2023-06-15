@@ -12,9 +12,13 @@ const Login = () => {
   const loginService: ILoginService = new LoginService();
 
   const handleLogin = async () => {
-    const token = await loginService.sendLogin(username, password);
-    localStorage.setItem("token", token);
-    navigate("/home");
+    try {
+      const token = await loginService.sendLogin(username, password);
+      localStorage.setItem("token", token);
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -25,6 +29,7 @@ const Login = () => {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
+        backgroundColor: "#f5f5f5",
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>
@@ -45,7 +50,7 @@ const Login = () => {
           label="Username"
           variant="outlined"
           value={username}
-          onChange={(e : any) => setUsername(e.target.value)}
+          onChange={(e: any) => setUsername(e.target.value)}
         />
         <TextField
           id="password"
@@ -53,7 +58,7 @@ const Login = () => {
           type="password"
           variant="outlined"
           value={password}
-          onChange={(e : any) => setPassword(e.target.value)}
+          onChange={(e: any) => setPassword(e.target.value)}
         />
         <Button type="submit" variant="contained">
           Login

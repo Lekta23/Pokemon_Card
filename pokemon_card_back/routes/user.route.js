@@ -44,9 +44,13 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    console.log(req.body.username, req.body.password);
-    const user = await UserService.loginUser(req.body.username, req.body.password);
-    res.json(user);
+    try {
+        console.log(req.body.username, req.body.password);
+        const user = await UserService.loginUser(req.body.username, req.body.password);
+        res.json(user);
+    } catch (error) {
+        throw error;
+    }
 });
 
 router.post('/disconnect', async (req, res) => {

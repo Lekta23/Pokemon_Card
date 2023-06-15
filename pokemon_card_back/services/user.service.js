@@ -104,11 +104,8 @@ class UserService {
     }
 
     async loginUser(username, password) {
-        console.log('ouais', username, password);
         if (username === undefined || password === undefined) {
-            return {
-                error: 'username or password is undefined'
-            };
+            throw new Error('username or password undefined');
         }
         const user = await this.getUserByUsernameAndPassword(username, password);
         console.log('user', user);
@@ -127,9 +124,7 @@ class UserService {
             const token = tokenService.updateToken(username);
             return token;
         }
-        return {
-            error: 'wrong password'
-        };
+        throw new Error('username or password incorrect');
     }
 
     async disconnectUser(token) {
